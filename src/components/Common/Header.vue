@@ -46,15 +46,15 @@ function hello() {
       </n-space>
 
       <n-space text-4 font-bold justify="space-around">
-        <router-link to="/keyboard" theme-color>
+        <router-link to="/Keyboard" theme-color>
           {{ t("header.keyboard-mode") }}
         </router-link>
         <n-divider vertical />
-        <router-link to="/search" theme-color>
+        <router-link to="/Search" theme-color>
           {{ t("header.search-mode") }}
         </router-link>
         <n-divider vertical />
-        <router-link to="/hothub" theme-color>
+        <router-link to="/HotHub" theme-color>
           {{ t("header.hothub") }}
         </router-link>
       </n-space>

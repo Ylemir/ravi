@@ -1,5 +1,10 @@
 @import './bg.css';
 
+:root {
+  --ravi-primary: #18a058;
+  --ravi-primary-hover: #36ad6a;
+}
+
 html,
 body,
 #app {
