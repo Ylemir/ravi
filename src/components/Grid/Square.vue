@@ -2,25 +2,32 @@
 import type { PropType } from 'vue'
 import type { Site } from '~/store/types'
 import { onClickOutside } from '@vueuse/core'
-import { inject, nextTick, ref } from 'vue'
+import { ref } from 'vue'
 import { useWebsiteStore } from '~/store/website'
 
 const props = defineProps({
-  title: String,
+  title: {
+    type: String,
+    required: true,
+  },
   sites: {
     type: Object as PropType<Array<Site>>,
     required: true,
   },
-  callback: Function as PropType<(id: number) => void>,
 })
+
+const emit = defineEmits<{
+  (e: 'contextmenu', payload: { site: Site; event: MouseEvent }): void
+}>()
 
 const websiteStore = useWebsiteStore()
 
-// 存储与展示分离
 const titleName = ref(props.title)
+const originalTitle = props.title
 
 const inputStatus = ref('success')
 const showInput = ref(false)
+const titleInputRef = ref<HTMLElement | null>(null)
 
 function openInput(e: MouseEvent) {
   e.preventDefault()
@@ -28,42 +35,41 @@ function openInput(e: MouseEvent) {
 }
 
 function saveTitle() {
-  if (titleName.value?.trim().length === 0) {
+  if (titleName.value.trim().length === 0) {
     inputStatus.value = 'error'
     window.$message.warning('The input cannot be blank')
     return
   }
   inputStatus.value = 'success'
   showInput.value = false
-  websiteStore.setTitle(props.title, titleName.value)
-  window.$message.success('Save successfully')
+  if (props.title !== titleName.value) {
+    websiteStore.setTitle(props.title, titleName.value)
+    window.$message.success('Save successfully')
+  }
 }
 
-// 失焦即保存
-const target = ref(null)
-onClickOutside(target, _ => saveTitle())
+function cancelEdit() {
+  showInput.value = false
+  titleName.value = originalTitle
+  inputStatus.value = 'success'
+}
 
-const showContext = inject<boolean>('showContext')
-const positionX = inject<number>('positionX')
-const positionY = inject<number>('positionY')
+onClickOutside(titleInputRef, () => {
+  if (showInput.value)
+    saveTitle()
+})
 
 function handleContextMenu(site: Site, event: MouseEvent) {
   event.preventDefault()
-  showContext.value = false
-  nextTick().then(() => {
-    showContext.value = true
-    positionX.value = event.clientX
-    positionY.value = event.clientY
-    websiteStore.setCurrentSite(site)
-  })
+  emit('contextmenu', { site, event })
 }
 </script>
 
 <template>
   <n-h4 prefix="bar" class="ml-1 max-w-[90%]" @click="openInput">
     <n-input
-      v-if="showInput" ref="target" v-model:value="titleName" type="text" :status="inputStatus" maxlength="10"
-      minlength="1" autofocus clearable
+      v-if="showInput" ref="titleInputRef" v-model:value="titleName" type="text" :status="inputStatus" maxlength="10"
+      minlength="1" autofocus clearable @keydown.enter="saveTitle" @keydown.esc="cancelEdit"
     />
     <n-text v-else strong>
       {{ titleName }}

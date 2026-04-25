@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useActiveElement, useMagicKeys, whenever } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
+import { nextTick } from 'vue'
+import type { Site } from '~/store/types'
 import { useWebsiteStore } from '~/store/website'
-import { openUrl } from '~/utils/common'
 
 const websiteStore = useWebsiteStore()
 
-const { websites, showModal, getHotKeys: hotKeys } = storeToRefs(websiteStore)
+const { websites, showModal, showContext, positionX, positionY } = storeToRefs(websiteStore)
 
 const dropdownOptions = [
   {
@@ -15,48 +15,29 @@ const dropdownOptions = [
   },
 ]
 
-const showContext = ref(false)
-const positionX = ref(0)
-const positionY = ref(0)
+function handleContextMenu({ site, event }: { site: Site; event: MouseEvent }) {
+  websiteStore.setShowContext(false)
+  nextTick().then(() => {
+    websiteStore.setShowContext(true)
+    websiteStore.setContextPosition(event.clientX, event.clientY)
+    websiteStore.setCurrentSite(site)
+  })
+}
 
-provide('showContext', showContext)
-provide('positionX', positionX)
-provide('positionY', positionY)
 function handleSelect(_: string | number) {
-  showContext.value = false
+  websiteStore.setShowContext(false)
   websiteStore.setShowModal(true)
 }
 
 function onClickoutside() {
-  showContext.value = false
+  websiteStore.setShowContext(false)
 }
-
-// 全局快捷键
-const activeElement = useActiveElement()
-const notUsingInput = computed(() =>
-  activeElement.value?.tagName !== 'INPUT'
-  && activeElement.value?.tagName !== 'TEXTAREA',
-)
-
-const { current } = useMagicKeys()
-
-whenever(current, () => {
-  if (!notUsingInput.value || showContext.value || showModal.value)
-    return
-
-  const keys = [...current.keys()].map(key => key.toUpperCase())
-  for (const key of keys) {
-    if (hotKeys.value[key])
-      openUrl(hotKeys.value[key].url)
-  }
-  current.clear()
-})
 </script>
 
 <template>
   <n-grid item-responsive :x-gap="35" :y-gap="35" cols="1 800:2 1200:3">
     <n-grid-item v-for="(sites, title, index) in websites" :key="index" class="mx-auto">
-      <Square :sites="sites" :title="title" />
+      <Square :sites="sites" :title="title" @contextmenu="handleContextMenu" />
     </n-grid-item>
   </n-grid>
   <n-dropdown

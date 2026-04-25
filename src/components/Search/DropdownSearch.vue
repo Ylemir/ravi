@@ -22,7 +22,7 @@ function setSearchEngine(key: string | number, option: DropdownOption) {
   currentEngine.value = option
 }
 
-// value
+// TODO
 function onSearch(searchValue: string) {
   window.open(currentEngine.value.key.replaceAll('%s', searchValue))
 }
@@ -32,7 +32,7 @@ function onSearch(searchValue: string) {
   <n-input-group>
     <n-dropdown :options="dropdownEngines" :on-select="setSearchEngine">
       <n-button>
-        <n-avatar mr-1 color="white" size="small" :src="currentEngine.favicon" />
+        <n-avatar mr-1 color="white" size="small" :src="getFavicon(currentEngine.key)" :fallback-src="currentEngine.favicon" />
         {{ currentEngine.label }}
       </n-button>
     </n-dropdown>

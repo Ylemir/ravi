@@ -2,12 +2,12 @@ import axios from 'axios'
 
 axios.defaults.timeout = 5000
 
-axios.jsonp = (url: string) => {
+axios.jsonp = (url) => {
   if (!url) {
     console.error('Axios.JSONP 至少需要一个url参数!')
     return
   }
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     window.jsonCallBack = (result) => {
       resolve(result)
     }
@@ -21,7 +21,7 @@ axios.jsonp = (url: string) => {
   })
 }
 
-axios.json2jsonp = (url: string) => axios.jsonp(`https://json2jsonp.com/?url=${url}`)
+axios.json2jsonp = url => axios.jsonp(`https://json2jsonp.com/?url=${url}`)
 
 export async function getSearchPrompt(wd) {
   return axios.jsonp(`https://www.baidu.com/sugrec?p=3&json=1&prod=pc&wd=${wd}`)
