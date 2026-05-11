@@ -21,8 +21,6 @@ axios.jsonp = (url) => {
   })
 }
 
-axios.json2jsonp = url => axios.jsonp(`https://json2jsonp.com/?url=${url}`)
-
 export async function getSearchPrompt(wd) {
   return axios.jsonp(`https://www.baidu.com/sugrec?p=3&json=1&prod=pc&wd=${wd}`)
     .then(data => data.g?.map(e => e.q))
@@ -30,12 +28,4 @@ export async function getSearchPrompt(wd) {
       console.warn(error)
       return error
     })
-}
-
-export function getTophub() {
-  return axios.json2jsonp('https://open.tophub.today/hot')
-    .then((response) => {
-      return response.data.items
-    })
-    .catch(error => console.warn(error))
 }

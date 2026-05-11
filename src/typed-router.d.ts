@@ -37,13 +37,6 @@ declare module 'vue-router/auto-routes' {
       { all: ParamValue<false> },
       | never
     >,
-    '/HotHub': RouteRecordInfo<
-      '/HotHub',
-      '/HotHub',
-      Record<never, never>,
-      Record<never, never>,
-      | never
-    >,
     '/Keyboard': RouteRecordInfo<
       '/Keyboard',
       '/Keyboard',
@@ -87,12 +80,6 @@ declare module 'vue-router/auto-routes' {
     'src/pages/[...all].vue': {
       routes:
         | '/[...all]'
-      views:
-        | never
-    }
-    'src/pages/HotHub.vue': {
-      routes:
-        | '/HotHub'
       views:
         | never
     }

@@ -9,7 +9,6 @@ language:
   zh: 中文
 
 header:
-  hothub: 热榜
   keyboard-mode: 键盘模式
   search-mode: 搜索模式
   setting: 设置

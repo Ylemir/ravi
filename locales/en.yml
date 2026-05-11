@@ -9,7 +9,6 @@ language:
 header:
   keyboard-mode: Keyboard Mode
   search-mode: Search Mode
-  hothub: Hothub
   setting: Settings
 
 settings:

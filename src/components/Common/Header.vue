@@ -53,10 +53,6 @@ function hello() {
         <router-link to="/Search" theme-color>
           {{ t("header.search-mode") }}
         </router-link>
-        <n-divider vertical />
-        <router-link to="/HotHub" theme-color>
-          {{ t("header.hothub") }}
-        </router-link>
       </n-space>
 
       <n-space text-xl font-medium align="center" justify="space-around">

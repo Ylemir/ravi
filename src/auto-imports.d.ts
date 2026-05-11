@@ -49,7 +49,6 @@ declare global {
   const getCurrentWatcher: typeof import('vue').getCurrentWatcher
   const getFavicon: typeof import('./utils/common').getFavicon
   const getSearchPrompt: typeof import('./utils/requests.js').getSearchPrompt
-  const getTophub: typeof import('./utils/requests.js').getTophub
   const h: typeof import('vue').h
   const ignorableWatch: typeof import('@vueuse/core').ignorableWatch
   const inject: typeof import('vue').inject
@@ -378,7 +377,6 @@ declare module 'vue' {
     readonly getCurrentWatcher: UnwrapRef<typeof import('vue')['getCurrentWatcher']>
     readonly getFavicon: UnwrapRef<typeof import('./utils/common')['getFavicon']>
     readonly getSearchPrompt: UnwrapRef<typeof import('./utils/requests.js')['getSearchPrompt']>
-    readonly getTophub: UnwrapRef<typeof import('./utils/requests.js')['getTophub']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
