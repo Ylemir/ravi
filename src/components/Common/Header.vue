@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { LangEnum } from '~/enum/appEnum'
 import { language, theme } from '~/store/projectSetting'
+import { availableLocales as locales, loadLanguageAsync } from '~/modules/i18n'
 
-const { t, availableLocales: locales, locale } = useI18n()
+const { t, locale } = useI18n()
 
 const langOptions = locales.map((lang) => {
   return {
@@ -19,8 +20,9 @@ function getLanguageList() {
   return langOptions
 }
 
-function changeLanguage(key: LangEnum) {
+async function changeLanguage(key: LangEnum) {
   language.value = key
+  await loadLanguageAsync(key)
   locale.value = key
 }
 
@@ -37,7 +39,6 @@ function hello() {
   <n-layout-header pb-1>
     <n-space align="center" justify="space-around" size="large">
       <n-space text-2xl align="center" justify="space-around">
-        <div i-ravi-fav text-3xl />
         <router-link to="/">
           <h1 class="color-#18a058 hover:color-#36ad6a">
             Ravi

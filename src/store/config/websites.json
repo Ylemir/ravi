@@ -1,14 +1,19 @@
 {
   "AI": [
     {
-      "name": "通义千问",
-      "url": "https://tongyi.aliyun.com/qianwen",
+      "name": "DeepSeek",
+      "url": "https://chat.deepseek.com",
       "shortcut": ""
     },
     {
-      "name": "DeepSeek",
-      "url": "https://chat.deepseek.com",
-      "shortcut": "A"
+      "name": "Qwen",
+      "url": "https://chat.qwen.ai/",
+      "shortcut": ""
+    },
+    {
+      "name": "通义千问",
+      "url": "https://tongyi.com",
+      "shortcut": ""
     },
     {
       "name": "豆包",
@@ -16,8 +21,18 @@
       "shortcut": ""
     },
     {
-      "name": "ChatBot",
-      "url": "https://chat.vercel.ai",
+      "name": "Gemini",
+      "url": "https://gemini.google.com",
+      "shortcut": ""
+    },
+    {
+      "name": "OpenAI",
+      "url": "https://chatgpt.com",
+      "shortcut": "A"
+    },
+    {
+      "name": "Workers AI",
+      "url": "https://playground.ai.cloudflare.com",
       "shortcut": ""
     },
     {
@@ -26,23 +41,8 @@
       "shortcut": ""
     },
     {
-      "name": "Devv AI",
-      "url": "https://devv.ai/zh",
-      "shortcut": ""
-    },
-    {
-      "name": "Phind",
-      "url": "https://www.phind.com/",
-      "shortcut": ""
-    },
-    {
-      "name": "Perplexity",
-      "url": "https://www.perplexity.ai",
-      "shortcut": ""
-    },
-    {
-      "name": "Workers AI",
-      "url": "https://playground.ai.cloudflare.com",
+      "name": "Lmarena",
+      "url": "https://arena.ai/zh",
       "shortcut": ""
     }
   ],

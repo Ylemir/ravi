@@ -15,7 +15,7 @@ const appProvider = createComponet(AppProvider)
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,
-  { routes: setupLayouts(routes), base: import.meta.env.BASE_URL },
+  { routes: setupLayouts([...routes]), base: import.meta.env.BASE_URL },
   (ctx) => {
     // install all modules under `modules/`
     Object.values(import.meta.glob<{ install: UserModule }>('./modules/*.ts', { eager: true }))
