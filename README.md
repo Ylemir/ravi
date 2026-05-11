@@ -1,6 +1,6 @@
 # Ravi
 
-> 一个基于 Vue 3 的现代化 Web 应用，使用 Vite 构建，支持 PWA 和 SSG
+> 一个基于 Vue 3 的现代化 Web 应用，使用 Vite 构建
 
 ## 特性
 
@@ -11,8 +11,6 @@
 - 📦 **Pinia** - 轻量级状态管理
 - 🌐 **Vue i18n** - 国际化支持（中/英文）
 - 🎯 **UnoCSS** - 原子化 CSS 引擎
-- 📱 **PWA** - 渐进式 Web 应用支持
-- 🛠 **SSG** - 静态站点生成（vite-ssg）
 - 🚦 **自动路由** - 基于文件系统的路由生成（unplugin-vue-router）
 - 📝 **自动导入** - API 和组件自动导入
 - 🎭 **布局系统** - 基于 vite-plugin-vue-layouts
@@ -67,7 +65,7 @@ ravi/
 
 ### 环境要求
 
-- Node.js >= 22
+- Node.js >= 24
 - pnpm >= 10
 
 ### 安装依赖
@@ -87,11 +85,7 @@ pnpm dev
 ### 构建生产版本
 
 ```bash
-# SPA 构建
 pnpm build
-
-# SSG 静态站点生成
-pnpm ssg
 ```
 
 ### 预览生产版本
@@ -106,7 +100,6 @@ pnpm preview
 |------|------|
 | `pnpm dev` | 启动开发服务器（支持 --host 0.0.0.0） |
 | `pnpm build` | 构建 SPA 生产版本 |
-| `pnpm ssg` | 生成静态站点（SSG） |
 | `pnpm preview` | 预览生产构建结果 |
 | `pnpm lint` | 运行 ESLint 检查 |
 | `pnpm fix` | 自动修复 ESLint 错误 |
@@ -133,11 +126,6 @@ pnpm preview
 编辑 `locales/` 目录下的 YAML 文件：
 - `en.yml` - 英文翻译
 - `zh.yml` - 中文翻译
-
-## 浏览器支持
-
-- 现代浏览器（Chrome, Firefox, Safari, Edge）
-- 支持 PWA 安装
 
 ## License
 
