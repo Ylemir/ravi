@@ -36,7 +36,7 @@ function handleSelect(key: string | number) {
     <div flex="~ wrap" justify-around>
       <a
         v-for="site in currentGroup.sites" :key="site"
-        :href="site.url" target="_blank" class="hover:color-#18a058" flex="~ col"
+        :href="site.url" target="_blank" rel="noopener noreferrer" class="hover:color-#18a058" flex="~ col"
         m-2 cursor-pointer items-center
       >
         <Favicon :src="site.url" :text="site.name" />

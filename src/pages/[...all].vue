@@ -1,4 +1,4 @@
-<script setup ts>
+<script setup lang="ts">
 import { setTitle } from '~/store/projectSetting'
 
 const { t } = useI18n()

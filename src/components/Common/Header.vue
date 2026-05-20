@@ -13,12 +13,12 @@ const langOptions = locales.map((lang) => {
   }
 })
 
-function getLanguageList() {
-  langOptions.forEach((lang) => {
-    lang.disabled = lang.key === language.value
-  })
-  return langOptions
-}
+const languageList = computed(() =>
+  langOptions.map(lang => ({
+    ...lang,
+    disabled: lang.key === language.value,
+  }))
+)
 
 async function changeLanguage(key: LangEnum) {
   language.value = key
@@ -61,7 +61,7 @@ function hello() {
         <router-link to="/Settings">
           <div theme-color i="carbon-settings" />
         </router-link>
-        <n-dropdown trigger="hover" :options="getLanguageList()" @select="changeLanguage">
+        <n-dropdown trigger="hover" :options="languageList" @select="changeLanguage">
           <div i-carbon:ibm-watson-language-translator theme-color />
         </n-dropdown>
 

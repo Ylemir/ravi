@@ -74,7 +74,7 @@ function handleEditSite(site: Site, event: MouseEvent) {
       v-for="(site, index) in sites" :key="site.id"
       @contextmenu="handleEditSite({ ...site, index, group: title }, $event)"
     >
-      <a class="square" :href="site.url" target="_blank">
+      <a class="square" :href="site.url" target="_blank" rel="noopener noreferrer">
         <n-ellipsis max-w-sm>
           {{ site.name }}
         </n-ellipsis>
