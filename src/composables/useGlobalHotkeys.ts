@@ -6,7 +6,7 @@ import { openUrl } from '~/utils/common'
 
 export function useGlobalHotkeys() {
   const websiteStore = useWebsiteStore()
-  const { showModal, getHotKeys: hotKeys, showContext } = storeToRefs(websiteStore)
+  const { showModal, getHotKeys: hotKeys } = storeToRefs(websiteStore)
 
   // 全局快捷键
   const activeElement = useActiveElement()
@@ -18,7 +18,7 @@ export function useGlobalHotkeys() {
   const { current } = useMagicKeys()
 
   whenever(current, () => {
-    if (!notUsingInput.value || showContext.value || showModal.value)
+    if (!notUsingInput.value || showModal.value)
       return
 
     const keys = [...current.keys()].map(key => key.toUpperCase())

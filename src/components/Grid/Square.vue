@@ -17,7 +17,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits<{
-  (e: 'contextmenu', payload: { site: Site; event: MouseEvent }): void
+  (e: 'edit-site', payload: { site: Site; event: MouseEvent }): void
 }>()
 
 const websiteStore = useWebsiteStore()
@@ -59,9 +59,9 @@ onClickOutside(titleInputRef, () => {
     saveTitle()
 })
 
-function handleContextMenu(site: Site, event: MouseEvent) {
+function handleEditSite(site: Site, event: MouseEvent) {
   event.preventDefault()
-  emit('contextmenu', { site, event })
+  emit('edit-site', { site, event })
 }
 </script>
 
@@ -78,7 +78,7 @@ function handleContextMenu(site: Site, event: MouseEvent) {
   <n-grid :x-gap="8" :y-gap="8" :cols="3" class="max-w-[400px]">
     <n-grid-item
       v-for="(site, index) in sites" :key="site.id"
-      @contextmenu="handleContextMenu({ ...site, index, group: title }, $event)"
+      @contextmenu="handleEditSite({ ...site, index, group: title }, $event)"
     >
       <a class="square" :href="site.url" target="_blank">
         <n-ellipsis max-w-sm>

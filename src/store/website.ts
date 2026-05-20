@@ -13,9 +13,6 @@ export const useWebsiteStore = defineStore('app-site', {
     websites: JSON.parse(storage.getItem('websites')) || websites,
     currentSite: { name: '', url: '', shortcut: '' },
     showModal: false,
-    showContext: false,
-    positionX: 0,
-    positionY: 0,
   }),
   getters: {
     getHotKeys(): object {
@@ -35,13 +32,6 @@ export const useWebsiteStore = defineStore('app-site', {
     },
     setShowModal(showModal: boolean) {
       this.showModal = showModal
-    },
-    setShowContext(showContext: boolean) {
-      this.showContext = showContext
-    },
-    setContextPosition(x: number, y: number) {
-      this.positionX = x
-      this.positionY = y
     },
     setSite(site: Site) {
       // set new shortcut
