@@ -12,6 +12,9 @@ header:
   keyboard-mode: 键盘模式
   search-mode: 搜索模式
   setting: 设置
+  switch-to-light: 切换到浅色主题
+  switch-to-dark: 切换到深色主题
+  switch-language: 切换语言
 
 settings:
   background-image: 背景图
