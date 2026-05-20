@@ -1,20 +1,13 @@
 <script setup lang="ts">
-import type { PropType } from 'vue'
 import type { Site } from '~/store/types'
 import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
 import { useWebsiteStore } from '~/store/website'
 
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  sites: {
-    type: Object as PropType<Array<Site>>,
-    required: true,
-  },
-})
+const props = defineProps<{
+  title: string
+  sites: Site[]
+}>()
 
 const emit = defineEmits<{
   (e: 'edit-site', payload: { site: Site; event: MouseEvent }): void
@@ -23,7 +16,7 @@ const emit = defineEmits<{
 const websiteStore = useWebsiteStore()
 
 const titleName = ref(props.title)
-const originalTitle = props.title
+const originalTitle = ref(props.title)
 
 const inputStatus = ref('success')
 const showInput = ref(false)
@@ -31,6 +24,7 @@ const titleInputRef = ref<HTMLElement | null>(null)
 
 function openInput(e: MouseEvent) {
   e.preventDefault()
+  originalTitle.value = props.title
   showInput.value = true
 }
 
@@ -42,15 +36,15 @@ function saveTitle() {
   }
   inputStatus.value = 'success'
   showInput.value = false
-  if (props.title !== titleName.value) {
-    websiteStore.setTitle(props.title, titleName.value)
+  if (originalTitle.value !== titleName.value) {
+    websiteStore.setTitle(originalTitle.value, titleName.value)
     window.$message.success('Save successfully')
   }
 }
 
 function cancelEdit() {
   showInput.value = false
-  titleName.value = originalTitle
+  titleName.value = originalTitle.value
   inputStatus.value = 'success'
 }
 
@@ -108,15 +102,6 @@ function handleEditSite(site: Site, event: MouseEvent) {
 }
 
 .square:hover {
-  font-size: 1em;
   font-weight: bolder;
-}
-
-.edit {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 25px;
-  height: 10px;
 }
 </style>
